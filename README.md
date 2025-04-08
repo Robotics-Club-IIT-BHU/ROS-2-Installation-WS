@@ -35,6 +35,9 @@ Choose your adventure:
 🔹 Easy to delete if something goes wrong  
 📌 [VM Setup Guide](https://docs.google.com/document/d/1L55AWdZwC15YzvmSWa1djZLB4AHl80aEcOfpS0ie9nM/edit?usp=sharing)  
 
+  **Ubuntu 22.04 you need to install only**. [LINK](https://cdimage.ubuntu.com/releases/22.04/release/)
+  This One - **64-bit ARM (ARMv8/AArch64) server install image**
+
 💡 **Pro Tip:** Dual boot = 😎 for real robotics work!  
 ⚠️ **Warning:** Backup your data before dual booting!
 ## ⚡ Quick Installation of ROS2
