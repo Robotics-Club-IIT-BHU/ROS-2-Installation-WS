@@ -99,7 +99,7 @@ Open the terminal and write the following cmd:-
 ```bash
 sudo apt install python3-colcon-common-extensions
 ```
-#####MOVE the models folder to the gazebo models folder then 
+### MOVE the models folder to the gazebo models folder then 
 ```bash
 cd segway_Humble
 colcon build
@@ -118,4 +118,4 @@ python3 segway_control1.py
 ```
  then use the W A S D to navigate and X to stop
 
-####Phew, you made it to the end! 😮‍💨🎉 Thanks for hangin' in there like a champ 💪😄 Now go rest those eyeballs 👀🛌😂
+### Phew, you made it to the end! 😮‍💨🎉 Thanks for hangin' in there like a champ 💪😄 Now go rest those eyeballs 👀🛌😂
