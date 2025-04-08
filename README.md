@@ -41,9 +41,9 @@ Choose your adventure:
  **ROS 2 Humble Hawksbill (Installation Guide)**:
    - [Installation Guide for ROS 2](https://docs.ros.org/en/humble/Installation.html)
 
-#### Installation Steps
+#### Installation Steps{just copy and paste each command in terminal [for pasting commands in the terminal, press ctrl+shift+v]}
 
-#### 1. Set Locale:
+#### 1. Open Terminal in Ubuntu & Set Locale:
 ```bash
 locale  # check for UTF-8
 sudo apt update && sudo apt install locales
