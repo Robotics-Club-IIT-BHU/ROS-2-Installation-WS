@@ -92,4 +92,30 @@ ros2 run demo_nodes_cpp talker
 ```bash
 ros2 run demo_nodes_py listener
 ```
- 
+
+## 🌈 Welcome to the simulation!
+Download the given package if all the above process are done.
+Open the terminal and write the following cmd:-
+```bash
+sudo apt install python3-colcon-common-extensions
+```
+#####MOVE the models folder to the gazebo models folder then 
+```bash
+cd segway_Humble
+colcon build
+```
+for launching the simulation first source the WS 
+```bash
+source install/setup.bash
+```
+ ```bash
+ros2 launch segway_gazebo segway_sim.launch.py 
+```
+ this will launch the simulation 
+ for controlling the bot open new terminal and type 
+  ```bash
+python3 segway_control1.py 
+```
+ then use the W A S D to navigate and X to stop
+
+####Phew, you made it to the end! 😮‍💨🎉 Thanks for hangin' in there like a champ 💪😄 Now go rest those eyeballs 👀🛌😂
