@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_description)/urdf/base/base.gazebo.xacro"/>
+  
+  <xacro:macro name="base_v0" params="parent *joint_origin">
+	<joint name="base_link_joint" type="fixed">
+	  <xacro:insert_block name="joint_origin"/>
+	  <parent link="${parent}"/>
+	  <child link="base_link"/>
+	</joint>
+
+	<link name="base_link">
+	  <visual>
+		<geometry>
+		  <mesh filename="package://robot_description/meshes/STL/base/body.stl"/>
+		</geometry>
+	  </visual>
+	  <collision>
+		<geometry>
+		  <mesh filename="package://robot_description/meshes/STL/base/body.stl"/>
+		</geometry>
+	  </collision>
+	  <inertial>
+		<origin xyz="0 0 1.33"/>
+		<mass value="80.0"/>
+		<inertia ixx="0.0159" ixy="0" ixz="0" iyy="0.01237" iyz="0" izz="0.004399" />
+	  </inertial>
+	</link>
+  </xacro:macro>
+  
+</robot>
