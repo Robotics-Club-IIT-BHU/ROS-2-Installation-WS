@@ -33,7 +33,7 @@ Choose your adventure:
 ### Option 2: 🖥️📦 **Virtual Machine (Windows/Mac)**
 🔹 Safer for beginners (no partitioning)  
 🔹 Easy to delete if something goes wrong  
-📌 [VM Setup Guide]([https://ubuntu.com/tutorials/how-to-run-ubuntu-desktop-on-a-virtual-machine-using-virtualbox](https://docs.google.com/document/d/1L55AWdZwC15YzvmSWa1djZLB4AHl80aEcOfpS0ie9nM/edit?usp=sharing))  
+📌 [VM Setup Guide](https://docs.google.com/document/d/1L55AWdZwC15YzvmSWa1djZLB4AHl80aEcOfpS0ie9nM/edit?usp=sharing)  
 
 💡 **Pro Tip:** Dual boot = 😎 for real robotics work!  
 ⚠️ **Warning:** Backup your data before dual booting!
