@@ -44,7 +44,9 @@ Choose your adventure:
  **ROS 2 Humble Hawksbill (Installation Guide)**:
    - [Installation Guide for ROS 2](https://docs.ros.org/en/humble/Installation.html)
 
-#### Installation Steps{just copy and paste each command in terminal [for pasting commands in the terminal, press ctrl+shift+v]}
+## Installation Steps{just copy and paste each command in terminal [for pasting commands in the terminal, press ctrl+shift+v]}
+
+# For Windows
 
 #### 1. Open Terminal in Ubuntu & Set Locale:
 ```bash
@@ -86,7 +88,107 @@ source /opt/ros/humble/setup.bash
 echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
-#### 6. Check Installation:
+# For Mac User:
+
+**Initial System Setup**
+   ```bash
+   # Update system
+   sudo apt update
+   sudo apt upgrade -y
+   
+   # Install required dependencies
+   sudo apt install -y software-properties-common build-essential cmake git curl wget gnupg lsb-release
+  ```
+
+# Installation Guide for ROS 2 Humble and Gazebo Harmonic on Ubuntu 22.04 (ARM)
+
+This guide provides step-by-step instructions to install ROS 2 Humble and Gazebo Harmonic on an ARM-based Ubuntu 22.04 system, including environment setup and optimizations for ARM architecture.
+
+## 1. ROS 2 Humble Installation
+
+### Set Locale
+```bash
+sudo apt update && sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+```
+### Add ROS 2 Repository
+```bash
+sudo apt install curl gnupg lsb-release
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+```
+
+### Install ROS 2 Humble
+```bash
+sudo apt update
+sudo apt install -y ros-humble-desktop
+```
+### Setup ROS 2 Environment
+```bash
+echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
+source ~/.bashrc
+```
+### Install Development Tools
+```bash
+sudo apt install -y ros-dev-tools python3-colcon-common-extensions python3-rosdep python3-pip
+sudo rosdep init
+rosdep update
+```
+
+## 2. Gazebo Harmonic Installation
+### Add Gazebo Repository
+```bash
+sudo curl https://packages.osrfoundation.org/gazebo.gpg --output /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+```
+### Install Gazebo Harmonic
+```bash
+sudo apt update
+sudo apt install -y gz-harmonic
+```
+### Environment Setup for ARM
+```bash
+echo 'export LIBGL_ALWAYS_SOFTWARE=1' >> ~/.bashrc
+echo 'export MESA_GL_VERSION_OVERRIDE=3.3' >> ~/.bashrc
+echo 'export OGRE_RTT_MODE=Copy' >> ~/.bashrc
+source ~/.bashrc
+```
+
+## 3. ROS 2 - Gazebo Integration
+### Install Integration Packages
+```bash
+sudo apt update
+sudo apt install -y ros-humble-ros-gz-bridge ros-humble-ros-gz-sim ros-humble-ros-gz-interfaces
+```
+### Create a Workspace
+```bash
+mkdir -p ~/ros_gz_ws/src
+cd ~/ros_gz_ws/src
+```
+
+### Clone Integration Packages 
+```bash
+# Environment variables to optimize compilation on ARM
+export ASAN_OPTIONS=detect_leaks=0
+export CCACHE_SLOPPINESS=pch_defines,time_macros
+export CCACHE_COMPRESS=1
+export CCACHE_MAXSIZE=5G
+
+# Build with single thread to avoid memory issues
+MAKEFLAGS="-j1" colcon build --symlink-install --packages-select ros_gz_bridge --cmake-args -DCMAKE_CXX_FLAGS="-O1"
+
+# Build other packages
+colcon build --symlink-install --packages-skip ros_gz_bridge
+```
+### Source the Workspace
+```bash
+echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
+source ~/.bashrc
+```
+
+# Check Installation:
 ##### Open terminal 1:
 ```bash
 ros2 run demo_nodes_cpp talker
@@ -96,7 +198,7 @@ ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
-## 🌈 Welcome to the simulation!
+# 🌈 Welcome to the simulation!
 Download the given package if all the above process are done.
 Open the terminal and write the following cmd:-
 ```bash
