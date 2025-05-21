@@ -3,44 +3,44 @@
 [![ROS 2](https://img.shields.io/badge/ROS-2-%230A0FF9)](https://docs.ros.org)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-🤖 The ultimate guide to setting up your ROS 2 development environment with awesome simulations! 🌟
+The ultimate guide to setting up your ROS 2 development environment with awesome simulations!
 
-## 🌈 Welcome Robotics Enthusiasts!
+## Welcome Robotics Enthusiasts!
 
-Future robotics pioneers, welcome! This repository will help you:
+This repository will help you:
 
 - Dual Boot your System.
 - Install ROS 2 quickly and painlessly
-- Get access to cool pre-configured simulations
+- Get access to some cool pre-configured simulations
 - Jumpstart your robotics projects
 
 ## 🛠️ System Requirements
 
 - Ubuntu 22.04 (Jammy)
 - At least 4GB RAM (8GB recommended for simulations)
-- 15GB+ free disk space
+- 50GB+ free disk space
 - Stable internet connection
 
-## ⚡ DUAL BOOT or VM BOX Installation  🖥️🔀🐧
+## DUAL BOOT or VM BOX Installation
 
 Choose your adventure:
 
-### Option 1: 🖥️➡️🐧 **Dual Boot (Windows)**
+### Option 1: **Dual Boot (Windows)**
 🔹 Better performance (full hardware access)  
 🔹 Recommended for serious ROS development  
-📌 [Complete Dual Boot Guide](https://docs.google.com/document/d/1RVChwuKGptD5uSHYs5tflR0sVBAdXiwsjumxEQVBVG4/edit?usp=sharing)  
+   [Complete Dual Boot Guide](https://docs.google.com/document/d/1RVChwuKGptD5uSHYs5tflR0sVBAdXiwsjumxEQVBVG4/edit?usp=sharing)  
 
-### Option 2: 🖥️📦 **Virtual Machine (Windows/Mac)**
+### Option 2: **Virtual Machine (Windows/Mac)**
 🔹 Safer for beginners (no partitioning)  
 🔹 Easy to delete if something goes wrong  
-📌 [VM Setup Guide](https://docs.google.com/document/d/1L55AWdZwC15YzvmSWa1djZLB4AHl80aEcOfpS0ie9nM/edit?usp=sharing)  
+[VM Setup Guide](https://docs.google.com/document/d/1L55AWdZwC15YzvmSWa1djZLB4AHl80aEcOfpS0ie9nM/edit?usp=sharing)  
 
   **Ubuntu 22.04 you need to install only**. [LINK](https://cdimage.ubuntu.com/releases/22.04/release/)
   This One - **64-bit ARM (ARMv8/AArch64) server install image**
 
-💡 **Pro Tip:** Dual boot = 😎 for real robotics work!  
-⚠️ **Warning:** Backup your data before dual booting!
-## ⚡ Quick Installation of ROS2
+**Pro Tip:** Dual boot = for real robotics work!  
+**Warning:** Backup your data before dual booting!
+## Quick Installation of ROS2
  **ROS 2 Humble Hawksbill (Installation Guide)**:
    - [Installation Guide for ROS 2](https://docs.ros.org/en/humble/Installation.html)
 
@@ -198,7 +198,7 @@ ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
-# 🌈 Welcome to the simulation!
+# Welcome to the simulation!
 Download the given package if all the above process are done.
 Open the terminal and write the following cmd:-
 ```bash
@@ -223,4 +223,4 @@ python3 segway_control1.py
 ```
  then use the W A S D to navigate and X to stop
 
-### Phew, you made it to the end! 😮‍💨🎉 Thanks for hangin' in there like a champ 💪😄 Now go rest those eyeballs 👀🛌😂
+### Phew, you made it to the end! Thanks for hangin' in there like a champ
