@@ -187,7 +187,7 @@ colcon build --symlink-install --packages-skip ros_gz_bridge
 echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
-Open the terminal and write the following cmd:-
+### Open the terminal and write the following cmd:-
 ```bash
 sudo apt install python3-colcon-common-extensions
 ```
