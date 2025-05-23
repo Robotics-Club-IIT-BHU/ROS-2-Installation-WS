@@ -187,7 +187,10 @@ colcon build --symlink-install --packages-skip ros_gz_bridge
 echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
-
+Open the terminal and write the following cmd:-
+```bash
+sudo apt install python3-colcon-common-extensions
+```
 # Check Installation:
 ##### Open terminal 1:
 ```bash
@@ -196,10 +199,6 @@ ros2 run demo_nodes_cpp talker
 ##### Open terminal 2:
 ```bash
 ros2 run demo_nodes_py listener
-```
-Open the terminal and write the following cmd:-
-```bash
-sudo apt install python3-colcon-common-extensions
 ```
 
 ### Phew, you made it to the end! Thanks for hangin' in there like a champ
