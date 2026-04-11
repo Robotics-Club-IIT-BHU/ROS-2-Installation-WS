@@ -345,6 +345,7 @@ MAKEFLAGS="-j1" colcon build --symlink-install --cmake-args -DCMAKE_CXX_FLAGS="-
 # Source the newly built bridge
 echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
+```
 
 #For demo in terminal one open this 
 ros2 run demo_nodes_cpp talker
