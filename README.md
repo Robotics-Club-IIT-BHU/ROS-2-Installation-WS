@@ -234,6 +234,124 @@ ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 ```
 
+
+# 🚀 ROS 2 Humble & Gazebo Harmonic Installation (Mac ARM / Apple Silicon)
+
+This guide provides step-by-step instructions to install **ROS 2 Humble** and **Gazebo Harmonic** on M1/M2/M3 Macs using virtualization. 
+
+⚠️ **CRITICAL ARCHITECTURE WARNING:** ROS 2 Humble requires **Ubuntu 22.04 LTS**. Do not use Ubuntu 24.04. Furthermore, you must use the **ARM64** version of Ubuntu, not the AMD64 desktop version. 
+---
+## Part 1: System & UTM Virtual Machine Setup
+
+1. **Download UTM:** Get the virtual machine software from [mac.getutm.app](https://mac.getutm.app/). (https://www.youtube.com/watch?v=nUhQy5PDj2A&t=1129s)
+2. **Download Ubuntu 22.04 ARM Server:** Download the `Ubuntu 22.04 LTS ARM64 Server` ISO from the alternative architectures page on the official Ubuntu website.
+3. **Configure UTM:**
+   * Open UTM and click **+** -> **Virtualize** -> **Linux**.
+   * Browse and select the Ubuntu 22.04 ARM Server ISO.
+   * **RAM:** Allocate at least `4096 MB` (8GB recommended).
+   * **CPU:** Allocate 4 to 8 cores.
+   * **Storage:** Allocate at least **64 GB** (ROS 2 and Gazebo take up significant space).
+4. **Install Ubuntu Server:**
+   * Boot the VM and follow the standard "Try or Install Ubuntu Server" prompts.
+   * *Troubleshooting Note:* If the VM hangs on the reboot log after installation finishes, power off the VM, click the CD/DVD dropdown in the UTM settings, select **Clear** to remove the ISO, and start it again.
+5. **Install Graphical Interface (GUI):**
+   * Log into the command line and run:
+     ```bash
+     sudo apt update
+     sudo apt install tasksel
+     sudo apt install ubuntu-desktop
+     ```
+   * *This will take 20-30 minutes.* Once complete, run `sudo reboot now`.
+6. **Enable Retina Resolution & Copy/Paste:**
+   * Log into your new desktop environment, open the terminal, and install the SPICE tools:
+     ```bash
+     sudo apt install spice-vdagent spice-webdavd
+     ```
+   * Shut down the VM. In UTM Settings -> Display, check **Retina Mode**. Start the VM again.
+
+---
+
+## Part 2: ROS 2 Humble Installation
+
+Open the terminal in your Ubuntu VM and run the following commands sequentially.
+
+### 1. Initial System Setup
+```bash
+# Update system and install required dependencies
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y software-properties-common build-essential cmake git curl wget gnupg lsb-release locales
+
+# Set Locale
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Add ROS 2 GPG Key and Repository
+wget -qO- https://packages.osrfoundation.org/gazebo.gpg | sudo tee /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+git clone https://github.com/gazebosim/ros_gz.git -b humble
+
+# Install ROS 2 Humble Desktop
+sudo apt update
+sudo apt install -y ros-humble-desktop
+
+# Setup Environment
+echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
+source ~/.bashrc
+
+# Install Dev Tools & Initialize rosdep
+sudo apt install -y ros-dev-tools python3-colcon-common-extensions python3-rosdep python3-pip
+sudo rosdep init || true
+rosdep update
+
+# Add Gazebo Repository
+wget -qO- [https://packages.osrfoundation.org/gazebo.gpg](https://packages.osrfoundation.org/gazebo.gpg) | sudo tee /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] [http://packages.osrfoundation.org/gazebo/ubuntu-stable](http://packages.osrfoundation.org/gazebo/ubuntu-stable) $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+
+# Install Gazebo Harmonic
+sudo apt update
+sudo apt install -y gz-harmonic
+
+# Optimize VM Graphics for ARM MacBooks
+echo 'export LIBGL_ALWAYS_SOFTWARE=1' >> ~/.bashrc
+echo 'export MESA_GL_VERSION_OVERRIDE=3.3' >> ~/.bashrc
+echo 'export OGRE_RTT_MODE=Copy' >> ~/.bashrc
+source ~/.bashrc
+
+# Create the workspace
+mkdir -p ~/ros_gz_ws/src
+cd ~/ros_gz_ws/src
+
+# Clone the proper humble branch for the integration packages
+git clone [https://github.com/gazebosim/ros_gz.git](https://github.com/gazebosim/ros_gz.git) -b humble
+
+cd ~/ros_gz_ws
+
+# CRITICAL: Tell the compiler to target Harmonic instead of Fortress
+export GZ_VERSION=harmonic
+
+# Set environment variables to prevent the VM from running out of RAM during compilation
+export ASAN_OPTIONS=detect_leaks=0
+export CCACHE_SLOPPINESS=pch_defines,time_macros
+export CCACHE_COMPRESS=1
+export CCACHE_MAXSIZE=5G
+
+# Install ROS dependencies for the workspace
+rosdep install -r --from-paths src -i -y --rosdistro humble
+
+# Build the workspace (using a single thread to avoid VM freezing/crashing)
+MAKEFLAGS="-j1" colcon build --symlink-install --cmake-args -DCMAKE_CXX_FLAGS="-O1"
+
+# Source the newly built bridge
+echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
+source ~/.bashrc
+
+#For demo in terminal one open this 
+ros2 run demo_nodes_cpp talker
+# And in second terminal run this command
+ros2 run demo_nodes_py listener
+
+
 ## Some simulations
 
 ### 1. Turtlesim (Built-in ROS 2 Simulator)
