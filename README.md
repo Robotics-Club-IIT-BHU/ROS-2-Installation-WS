@@ -347,10 +347,14 @@ echo 'source ~/ros_gz_ws/install/setup.bash' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#For demo in terminal one open this 
+# For demo in terminal one open this 
+```bash
 ros2 run demo_nodes_cpp talker
+```
 # And in second terminal run this command
+```bash
 ros2 run demo_nodes_py listener
+```
 
 
 ## Some simulations
