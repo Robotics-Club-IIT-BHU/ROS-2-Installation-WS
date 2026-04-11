@@ -299,7 +299,7 @@ gz topic -t "/model/vehicle_blue/cmd_vel" -m gz.msgs.Twist -p "linear: {x: 1.0},
 gz topic -l
 ```
 
-> **Note:** On Mac, make sure Gazebo Harmonic is installed via `brew install gz-harmonic` before running these commands.
+> **Note:** On Mac, make sure Gazebo Harmonic is installed before running these commands.
 
 ---
 
